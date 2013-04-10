@@ -37,6 +37,18 @@ Route::get('/', function()
 	return View::make('home.index');
 });
 
+Route::get('/admin', function()
+{
+	return View::make('admin.dashboard.index');
+});
+
+Route::get('(login|register|logout)', function($action)
+{
+	return Controller::call("admin.user@{$action}");
+});
+
+Route::controller(Controller::detect());
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
@@ -91,9 +103,12 @@ Event::listen('500', function($exception)
 |
 */
 
+Route::filter('pattern: admin*', 'auth');
+
 Route::filter('before', function()
 {
 	// Do stuff before every request to your application...
+	Session::put('requested_url', URI::current());
 });
 
 Route::filter('after', function($response)
@@ -108,5 +123,5 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::to('login');
+	if ( ! Sentry::check()) return Redirect::to('login');
 });
