@@ -4,7 +4,7 @@ class Create_Site_Domains_Table {
 
 	public function up()
     {
-		Schema::create('domains', function($table) {
+		Schema::create('site_domains', function($table) {
 			$table->increments('id');
 			$table->integer('site_id');
 			$table->string('domain')->unique();
@@ -16,7 +16,7 @@ class Create_Site_Domains_Table {
 
 	public function down()
     {
-		Schema::drop('domains');
+		Schema::drop('site_domains');
 
     }
 
