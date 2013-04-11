@@ -4,20 +4,18 @@ class Create_User_Links_Table {
 
 	public function up()
     {
-		Schema::create('links', function($table) {
-			$table->increments('id');
+		Schema::create('user_links', function($table) {
 			$table->integer('user_id');
 			$table->string('type');
 			$table->string('title');
 			$table->string('link');
-			$table->timestamps();
 	});
 
     }    
 
 	public function down()
     {
-		Schema::drop('links');
+		Schema::drop('user_links');
 
     }
 
