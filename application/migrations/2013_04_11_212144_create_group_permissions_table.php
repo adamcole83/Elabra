@@ -4,7 +4,7 @@ class Create_Group_Permissions_Table {
 
 	public function up()
     {
-		Schema::create('permissions', function($table) {
+		Schema::create('group_permissions', function($table) {
 			$table->increments('id');
 			$table->integer('permission_id');
 			$table->integer('group_id');
@@ -15,7 +15,7 @@ class Create_Group_Permissions_Table {
 
 	public function down()
     {
-		Schema::drop('permissions');
+		Schema::drop('group_permissions');
 
     }
 
