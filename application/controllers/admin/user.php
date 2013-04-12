@@ -47,7 +47,7 @@ class Admin_User_Controller extends Base_Controller {
     public function action_authenticate()
     {
         // Attempt to log the user in
-        if (User::login(Input::get(Config::get('sentry::login_column')), Input::get('password'), Input::get('remember_me')))
+        if (User::login(Input::get(Config::get('application.auth.login_column')), Input::get('password'), Input::get('remember_me')))
         {
             // If successful, redirect to page requested
             Redirect::to(Session::get('requested_page'));
@@ -62,13 +62,17 @@ class Admin_User_Controller extends Base_Controller {
 
     public function action_login()
     {
+        if (Cookie::get('remember_me'))
+        {
+            return View::make('admin.users.login')->with('user', User::find(Cookie::get('remember_me')));
+        }
         return View::make('admin.users.login');
     }
 
     public function action_logout()
     {
         // Log the user out
-        //User::logout();
+        Auth::logout();
 
         // Redirect the user to login
         Redirect::to('login');

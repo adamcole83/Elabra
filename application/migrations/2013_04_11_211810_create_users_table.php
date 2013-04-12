@@ -19,7 +19,7 @@ class Create_Users_Table {
 			$table->integer('group_id');
 			$table->timestamp('last_login');
 			$table->timestamps();
-	});
+		});
 
     }    
 

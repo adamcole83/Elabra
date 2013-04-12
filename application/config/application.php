@@ -196,4 +196,9 @@ return array(
 		'View'       	=> 'Laravel\\View',
 	),
 
+	'auth' => array(
+		'superuser' => 'superuser',
+		'login_column' => 'username',
+	),
+
 );

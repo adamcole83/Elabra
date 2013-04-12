@@ -8,7 +8,7 @@ class Create_Site_Domains_Table {
 			$table->increments('id');
 			$table->integer('site_id');
 			$table->string('domain')->unique();
-			$table->integer('default');
+			$table->integer('default')->default(0);
 			$table->timestamps();
 	});
 

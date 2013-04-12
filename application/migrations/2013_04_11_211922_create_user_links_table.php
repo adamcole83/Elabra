@@ -5,6 +5,7 @@ class Create_User_Links_Table {
 	public function up()
     {
 		Schema::create('user_links', function($table) {
+			$table->increments('id');
 			$table->integer('user_id');
 			$table->string('type');
 			$table->string('title');
