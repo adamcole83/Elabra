@@ -42,12 +42,47 @@ Route::get('/admin', function()
 	return View::make('admin.dashboard.index');
 });
 
-Route::get('(login|register|logout)', function($action)
+Route::controller(Controller::detect());
+
+Route::get('login', function()
 {
-	return Controller::call("admin.user@{$action}");
+	// User::create(array(
+	// 	'username' => 'jenkinsac',
+	// 	'password' => Hash::make('d3st1Ny.U7'),
+	// 	'email' => 'jenkinsac@health.missouri.edu',
+	// ));
+	return View::make('admin.auth.login');
 });
 
-Route::controller(Controller::detect());
+Route::post('login', function()
+{
+	// get POST data
+	$userdata = array(
+		'username' => Input::get('username'),
+		'password' => Input::get('password'),
+		'remember' => Input::get('remember'),
+	);
+
+	if (Auth::attempt($userdata))
+	{
+		// we are now logged in, go to admin
+		error_log("Logged in");
+		return Redirect::to('admin');
+	}
+	else
+	{
+		error_log("Not logged in");
+		// auth failure! let's go back to the login
+		return Redirect::to('login')
+			->with('login_errors', true);
+	}
+});
+
+Route::get('logout', function()
+{
+	Auth::logout();
+	return Redirect::to('login');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -123,5 +158,5 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	if ( ! Sentry::check()) return Redirect::to('login');
+	if (Auth::guest()) return Redirect::to('login');
 });

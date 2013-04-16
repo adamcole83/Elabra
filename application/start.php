@@ -47,6 +47,8 @@ $aliases = Laravel\Config::get('application.aliases');
 
 Laravel\Autoloader::$aliases = $aliases;
 
+//Autoloader::alias('LDAPauth\\LDAPauth', 'LDAPauth');
+
 /*
 |--------------------------------------------------------------------------
 | Auto-Loader Namespaces
@@ -60,6 +62,11 @@ Autoloader::namespaces(array(
 	''
 ));
 
+Auth::extend('LDAPauth', function()
+{
+	return new LDAPauth();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Auto-Loader Mappings
@@ -72,7 +79,8 @@ Autoloader::namespaces(array(
 */
 
 Autoloader::map(array(
-	'Base_Controller' => path('app').'controllers/base.php',
+	'Base_Controller'    => path('app').'controllers/base.php',
+	//'LDAPauth\\LDAPauth' => path('app').'libraries/LDAPauth.php',
 ));
 
 /*

@@ -32,6 +32,17 @@ class Attempts extends Eloquent
 			$this->where('ip_address' '=', $this->ip_address);
 		}
 
-		$result = $this->first();
+		$result = $this->all();
+
+		foreach ($result as &$row)
+		{
+			$row = get_object_vars($row);
+
+			$time = new DateTime($row['last_attempt_at']);
+			$time = $time->modify('+'.static::$limit['time'].' minutes')->getTimestamp();
+
+			// Check unsuspended time and clear if time is > than it
+		//	if ($row['unsuspended_at'])
+		}
 	}
 }

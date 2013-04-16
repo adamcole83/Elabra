@@ -35,47 +35,12 @@ class Admin_User_Controller extends Base_Controller {
 	public function action_edit($id)
     {
         
-
         return View::make('admin.users.edit');
     }    
 
 	public function action_delete()
     {
         return "Delete User";
-    }
-
-    public function action_authenticate()
-    {
-        // Attempt to log the user in
-        if (User::login(Input::get(Config::get('application.auth.login_column')), Input::get('password'), Input::get('remember_me')))
-        {
-            // If successful, redirect to page requested
-            Redirect::to(Session::get('requested_page'));
-        }
-        else
-        {
-            // If unsuccessful, redirect to login to try again
-            Session::flash('Unable to login');
-            Redirect::to('login');
-        }
-    }
-
-    public function action_login()
-    {
-        if (Cookie::get('remember_me'))
-        {
-            return View::make('admin.users.login')->with('user', User::find(Cookie::get('remember_me')));
-        }
-        return View::make('admin.users.login');
-    }
-
-    public function action_logout()
-    {
-        // Log the user out
-        Auth::logout();
-
-        // Redirect the user to login
-        Redirect::to('login');
     }
 
 }
