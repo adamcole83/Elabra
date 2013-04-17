@@ -12,8 +12,8 @@ class Admin_User_Controller extends Admin_Controller {
         // Grab all users
         $users = User::all();
 
-        // Return the view
-        return View::make('admin.users.index')->with('users', $users);
+        // Set the view
+        $this->layout->nest('content', 'admin.users.index');
     }    
 
 	public function action_show($id)
