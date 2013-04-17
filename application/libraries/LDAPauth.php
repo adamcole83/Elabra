@@ -47,7 +47,7 @@ class LDAPauth extends Laravel\Auth\Drivers\Driver {
 			{
 				return $this->user = $this->model()->find($token);
 			}
-			return false;
+			return;
 		}
 
 		if (is_null($this->connection))
