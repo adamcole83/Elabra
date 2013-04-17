@@ -34,7 +34,7 @@
 
 Route::get('/', function()
 {
-	$theme = IoC::resolve('Theme');
+	//$theme = IoC::resolve('Theme');
 	return View::make('home.index');
 });
 
@@ -45,6 +45,7 @@ Route::get('admin', function()
 
 Route::get('login', function()
 {
+	if ( ! Auth::guest()) return Redirect::to('admin');
 	return View::make('admin.auth.login');
 });
 
