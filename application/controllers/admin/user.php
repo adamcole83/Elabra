@@ -1,17 +1,16 @@
 <?php
 
-class Admin_User_Controller extends Base_Controller {    
+class Admin_User_Controller extends Admin_Controller {    
 
     public function __construct()
     {
         parent::__construct();
-
     }
 
 	public function action_index()
     {
         // Grab all users
-        
+        $users = User::all();
 
         // Return the view
         return View::make('admin.users.index')->with('users', $users);
@@ -20,7 +19,7 @@ class Admin_User_Controller extends Base_Controller {
 	public function action_show($id)
     {
         // Find the user using the user id
-        
+        $user = User::find($id);
 
         // Return the view
         return View::make('admin.users.show')->with('user', $user);

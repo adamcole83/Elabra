@@ -34,23 +34,17 @@
 
 Route::get('/', function()
 {
+	$theme = IoC::resolve('Theme');
 	return View::make('home.index');
 });
 
-Route::get('/admin', function()
+Route::get('admin', function()
 {
 	return View::make('admin.dashboard.index');
 });
 
-Route::controller(Controller::detect());
-
 Route::get('login', function()
 {
-	// User::create(array(
-	// 	'username' => 'jenkinsac',
-	// 	'password' => Hash::make('d3st1Ny.U7'),
-	// 	'email' => 'jenkinsac@health.missouri.edu',
-	// ));
 	return View::make('admin.auth.login');
 });
 
@@ -66,12 +60,10 @@ Route::post('login', function()
 	if (Auth::attempt($userdata))
 	{
 		// we are now logged in, go to admin
-		error_log("Logged in");
 		return Redirect::to('admin');
 	}
 	else
 	{
-		error_log("Not logged in");
 		// auth failure! let's go back to the login
 		return Redirect::to('login')
 			->with('login_errors', true);
@@ -83,6 +75,8 @@ Route::get('logout', function()
 	Auth::logout();
 	return Redirect::to('login');
 });
+
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------

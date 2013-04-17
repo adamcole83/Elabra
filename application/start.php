@@ -58,10 +58,6 @@ Laravel\Autoloader::$aliases = $aliases;
 |
 */
 
-Autoloader::namespaces(array(
-	''
-));
-
 Auth::extend('LDAPauth', function()
 {
 	return new LDAPauth();
@@ -79,8 +75,8 @@ Auth::extend('LDAPauth', function()
 */
 
 Autoloader::map(array(
-	'Base_Controller'    => path('app').'controllers/base.php',
-	//'LDAPauth\\LDAPauth' => path('app').'libraries/LDAPauth.php',
+	'Admin_Controller' => path('app').'controllers/admin.php',
+	'Base_Controller'  => path('app').'controllers/base.php',
 ));
 
 /*
@@ -98,6 +94,14 @@ Autoloader::directories(array(
 	path('app').'models',
 	path('app').'libraries',
 ));
+
+IoC::singleton('Theme', function()
+{
+	$config = array(
+		'theme_path'=>'themes',
+	);
+	return $theme = new Theme("admin", $config);
+});
 
 /*
 |--------------------------------------------------------------------------

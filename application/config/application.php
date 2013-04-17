@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'asset_url' => 'public',
+	'asset_url' => 'application/assets',
 
 	/*
 	|--------------------------------------------------------------------------
