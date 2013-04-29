@@ -6,36 +6,47 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<!-- Stylesheets -->
-		{{ HTML::style('css/bootstrap.css') }}
-		{{ HTML::style('css/flat-ui.css') }}
-		{{ Asset::styles() }}
+		@render('partials.stylesheets')
 
 		<!-- Header scripts -->
 		{{ Asset::container('header')->scripts() }}
 
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-			{{ HTML::style('js/html5shiv.js') }}
-		<![endif]-->
+		@yield('head')
+
 	</head>
 	<body>
 		
-		@yield('content')
+			<div class="navbar">
+				<div class="navbar-inner">
+				
+					<a class="brand" href="#">Elabra</a>
+
+					<div class="span4 pull-right">
+						{{ Form::select('department', array('Choose a department', 'xx' => 'Physical Medicine & Rehabilitation')) }}
+					</div>
+				</div>
+			</div>
+
+		<div class="container-fluid">
+			
+			<div class="row-fluid">
+				<div class="span3">
+					<form class="search">
+						<input type="search" class="search-query" placeholder="Search">
+					</form>
+					<aside>
+						Inner sidebar
+					</aside>
+				</div>
+				
+				<div class="span10">
+					@yield('content')
+				</div>
+			</div>
+		</div>
 
 		<!-- Scripts -->
-		{{ HTML::script('js/jquery-1.8.2.min.js') }}
-		{{ HTML::script('js/jquery-ui-1.10.0.custom.min.js') }}
-		{{ HTML::script('js/jquery.dropkick-1.0.0.js') }}
-		{{ HTML::script('js/custom-forms.js') }}
-		{{ HTML::script('js/jquery.tagsinput.js') }}
-		{{ HTML::script('js/bootstrap-tooltip.js') }}
-		{{ HTML::script('js/jquery.placeholder.js') }}
-		{{ HTML::script('js/application.js') }}
+		@render('partials.scripts')
 
-		{{ Asset::container('footer')->scripts() }}
-		<!--[if lt IE 9]>
-			{{ HTML::script('js/icon-font-ie7.js') }}
-			{{ HTML::script('js/lte-ie7-24.js') }}
-		<![endif]-->
 	</body>
 </html>

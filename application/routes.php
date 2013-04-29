@@ -46,6 +46,7 @@ Route::get('admin', function()
 Route::get('login', function()
 {
 	if ( ! Auth::guest()) return Redirect::to('admin');
+	Asset::container('footer')->add('fss', 'js/fss.min.js');
 	return View::make('admin.auth.login');
 });
 
